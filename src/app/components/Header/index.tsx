@@ -43,12 +43,16 @@ class Header extends React.Component<IProps, any> {
     return () => {
       clearAuth();
       this.props.setURL('/login');
+      this.setState({login:false});
+    };
+  }
+  public state={
+      login:true,
     };
 
-  }
-
   public render() {
-    return (
+
+    return (this.state.login?
       <Menu size="massive">
         <Menu.Item name="home" active={this.isActive('/', true)} onClick={this.handleClick('/')} />
         <Menu.Item name="record" active={this.isActive('/record') || this.isActive('/meeting')} onClick={this.handleClick('/record')} />
@@ -59,6 +63,9 @@ class Header extends React.Component<IProps, any> {
           <Menu.Item name="settings" active={this.isActive('/settings')} onClick={this.handleClick('/settings')} />
           <Menu.Item name="log out" onClick={this.logOut()} />
         </Menu.Menu>
+      </Menu>:
+      <Menu size="massive" position="center">
+        <Menu.Item name="Impactasaurus" active={this.isActive('/', true)} onClick={this.handleClick('/')} />
       </Menu>
     );
   }
